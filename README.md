@@ -1,4 +1,4 @@
-# Smart-Hire Memories: CSE A Journey (2022–2026)
+# Memorium: CSE A Journey (2022–2026)
 
 A private, emotionally engaging, and highly interactive digital memory platform for the CSE A batch.
 
