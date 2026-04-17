@@ -151,8 +151,14 @@ const Profile = () => {
                             <h1 className="text-4xl md:text-6xl font-display font-black text-ink">{profile?.name}</h1>
                             {isOwnProfile && (
                                 <button 
-                                    onClick={() => setIsEditing(true)}
-                                    className="cartoon-btn !bg-white !text-ink !py-2 !px-4 !text-lg md:!text-xl !shadow-[0_4px_0_0_#1e293b]"
+                                    onClick={() => {
+                                        console.log('Change Gear button clicked');
+                                        console.log('Current isEditing state:', isEditing);
+                                        console.log('currentUser:', currentUser);
+                                        console.log('profile id:', id);
+                                        setIsEditing(true);
+                                    }}
+                                    className="cartoon-btn !bg-white !text-ink !py-2 !px-4 !text-lg md:!text-xl !shadow-[0_4px_0_0_#1e293b] hover:!bg-gray-100 active:!translate-y-1"
                                 >
                                     <Edit3 size={18} className="mr-2" /> Change Gear
                                 </button>
@@ -237,7 +243,9 @@ const Profile = () => {
 
             {/* Edit Profile Modal using Portal */}
             <AnimatePresence>
-                {isEditing && createPortal(
+                {isEditing && (
+                    console.log('Modal should be rendering, isEditing:', isEditing),
+                    createPortal(
                     <div className="fixed inset-0 z-[9999] flex items-start justify-center px-4 py-20 bg-ink/90 backdrop-blur-md overflow-y-auto">
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0, rotate: 5 }}
