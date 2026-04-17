@@ -244,12 +244,12 @@ const Profile = () => {
             {/* Edit Profile Modal (Inline instead of Portal for better Render compatibility) */}
             <AnimatePresence>
                 {isEditing && (
-                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-ink/90 backdrop-blur-md overflow-hidden">
+                    <div className="fixed inset-0 z-[1000] flex items-start justify-center p-4 bg-ink/90 backdrop-blur-md overflow-y-auto">
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0, rotate: 5 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
                             exit={{ scale: 0.8, opacity: 0, rotate: -5 }}
-                            className="bg-paper border-4 border-ink p-6 md:p-10 max-w-xl w-full rounded-3xl shadow-cartoon relative my-auto scrollbar-hide"
+                            className="bg-paper border-4 border-ink p-6 md:p-10 max-w-xl w-full rounded-3xl shadow-cartoon relative my-10 scrollbar-hide"
                         >
                             <button 
                                 onClick={() => { console.log('Closing modal'); setIsEditing(false); }}
