@@ -241,19 +241,19 @@ const Profile = () => {
                 )}
             </div>
 
-            {/* Edit Profile Modal using Portal */}
+            {/* Edit Profile Modal (Inline instead of Portal for better Render compatibility) */}
             <AnimatePresence>
-                {isEditing && createPortal(
-                    <div className="fixed inset-0 z-[9999] flex items-start justify-center px-4 py-20 bg-ink/90 backdrop-blur-md overflow-y-auto">
+                {isEditing && (
+                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-ink/90 backdrop-blur-md overflow-hidden">
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0, rotate: 5 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
                             exit={{ scale: 0.8, opacity: 0, rotate: -5 }}
-                            className="bg-paper border-4 border-ink p-6 md:p-10 max-w-xl w-full rounded-3xl shadow-cartoon relative my-8 mb-20 transition-all"
+                            className="bg-paper border-4 border-ink p-6 md:p-10 max-w-xl w-full rounded-3xl shadow-cartoon relative my-auto scrollbar-hide"
                         >
                             <button 
-                                onClick={() => setIsEditing(false)}
-                                className="absolute top-2 right-2 md:-top-4 md:-right-4 w-10 h-10 md:w-12 md:h-12 bg-red-500 border-4 border-ink rounded-full flex items-center justify-center text-white shadow-cartoon transition-transform hover:scale-110 z-[110]"
+                                onClick={() => { console.log('Closing modal'); setIsEditing(false); }}
+                                className="absolute -top-4 -right-4 w-12 h-12 bg-red-500 border-4 border-ink rounded-full flex items-center justify-center text-white shadow-cartoon transition-transform hover:scale-110 z-[110]"
                             >
                                 <X size={28} strokeWidth={3} />
                             </button>
@@ -307,8 +307,7 @@ const Profile = () => {
                                 </button>
                             </form>
                         </motion.div>
-                    </div>,
-                    document.body
+                    </div>
                 )}
             </AnimatePresence>
         </div>
