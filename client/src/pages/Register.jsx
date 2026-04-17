@@ -69,6 +69,7 @@ const Register = () => {
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                                 className="cartoon-input"
+                                autoComplete="name"
                                 required
                             />
                         </div>
@@ -97,6 +98,7 @@ const Register = () => {
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                             className="cartoon-input"
+                            autoComplete="email"
                             required
                         />
                     </div>
@@ -111,6 +113,7 @@ const Register = () => {
                             value={formData.password}
                             onChange={(e) => setFormData({...formData, password: e.target.value})}
                             className="cartoon-input"
+                            autoComplete="new-password"
                             required
                         />
                     </div>
