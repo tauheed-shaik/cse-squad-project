@@ -71,10 +71,22 @@ const Profile = () => {
 
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
+        
+        // Validation
+        if (!editData.name || editData.name.trim().length < 2) {
+            alert('Hero name must be at least 2 characters long.');
+            return;
+        }
+        
+        if (newPic && !newPic.type.startsWith('image/')) {
+            alert('Please upload a valid image file.');
+            return;
+        }
+        
         setUpdating(true);
         const formData = new FormData();
-        formData.append('name', editData.name);
-        formData.append('bio', editData.bio);
+        formData.append('name', editData.name.trim());
+        formData.append('bio', editData.bio.trim());
         if (newPic) {
             formData.append('profilePic', newPic);
         }
@@ -90,8 +102,9 @@ const Profile = () => {
             setNewPic(null);
             setPicPreview(null);
         } catch (err) {
-            console.error(err);
-            alert('Failed to update stats.');
+            console.error('Profile update error:', err);
+            const errorMessage = err.response?.data?.error || err.message || 'Failed to update profile. Please try again.';
+            alert(errorMessage);
         } finally {
             setUpdating(false);
         }

@@ -50,7 +50,17 @@ router.get('/:id', async (req, res) => {
 router.put('/update', auth, upload.single('profilePic'), async (req, res) => {
     try {
         const { name, bio, allowAnonymous } = req.body;
-        let updateData = { name, bio, allowAnonymous };
+        
+        // Validation
+        if (!name || name.trim().length < 2) {
+            return res.status(400).json({ error: 'Name must be at least 2 characters long' });
+        }
+        
+        let updateData = { 
+            name: name.trim(), 
+            bio: bio ? bio.trim() : '', 
+            allowAnonymous 
+        };
 
         if (req.file) {
             const uploadPromise = new Promise((resolve, reject) => {
@@ -73,7 +83,8 @@ router.put('/update', auth, upload.single('profilePic'), async (req, res) => {
         const user = await User.findByIdAndUpdate(req.user, updateData, { new: true }).select('-password');
         res.json(user);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('Profile update error:', err);
+        res.status(500).json({ error: err.message || 'Failed to update profile' });
     }
 });
 
