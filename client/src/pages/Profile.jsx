@@ -92,18 +92,24 @@ const Profile = () => {
         }
 
         try {
+            console.log('Sending update request...');
             const res = await api.put('/api/users/update', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            // Update both the profile view and the global auth user
+            console.log('Update successful:', res.data);
+            
+            // Update local state
             setProfile(res.data);
+            
+            // Update global auth state
             login(localStorage.getItem('token'), res.data); 
+            
             setIsEditing(false);
             setNewPic(null);
             setPicPreview(null);
         } catch (err) {
             console.error('Profile update error:', err);
-            const errorMessage = err.response?.data?.error || err.message || 'Failed to update profile. Please try again.';
+            const errorMessage = err.response?.data?.error || err.response?.data?.message || err.message || 'Failed to update stats.';
             alert(errorMessage);
         } finally {
             setUpdating(false);
@@ -151,7 +157,7 @@ const Profile = () => {
                             <h1 className="text-4xl md:text-6xl font-display font-black text-ink">{profile?.name}</h1>
                             {isOwnProfile && (
                                 <button 
-                                    onClick={() => setIsEditing(true)}
+                                    onClick={() => { console.log('Change Gear clicked! isOwnProfile:', isOwnProfile); setIsEditing(true); }}
                                     className="cartoon-btn !bg-white !text-ink !py-2 !px-4 !text-lg md:!text-xl !shadow-[0_4px_0_0_#1e293b] hover:!bg-gray-100 active:!translate-y-1"
                                 >
                                     <Edit3 size={18} className="mr-2" /> Change Gear
