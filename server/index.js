@@ -12,13 +12,13 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000', 'https://heartsofcse.tech', 'https://cse-a-squad.vercel.app'],
+    origin: ['http://localhost:5173', 'http://localhost:3000', 'https://heartsofcse.tech', 'https://www.heartsofcse.tech', 'https://cse-a-squad.vercel.app'],
     credentials: true
 }));
 
 // Additional CORS headers for production
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'https://heartsofcse.tech', 'https://cse-a-squad.vercel.app'];
+    const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'https://heartsofcse.tech', 'https://www.heartsofcse.tech', 'https://cse-a-squad.vercel.app'];
     const origin = req.headers.origin;
     
     if (allowedOrigins.includes(origin)) {
